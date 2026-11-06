@@ -1,1 +1,670 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Recarga de Extintores en Soledad | Cl. 18 #35-10</title>
+  <meta name="description" content="Recarga y mantenimiento de extintores en Soledad, Atlántico. Ubicados en Calle 18 #35-10. Servicio técnico para empresas y hogares. Solicita tu revisión.">
+  <meta name="theme-color" content="#b91c1c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="robots" content="index, follow">
 
+  <style>
+    :root {
+      --primary: #b91c1c;
+      --primary-dark: #991b1b;
+      --accent: #f97316;
+      --secondary: #1c1917;
+      --bg: #fafaf9;
+      --card: #ffffff;
+      --text: #1c1917;
+      --text-muted: #57534e;
+      --border: #e7e5e4;
+      --shadow: 0 4px 16px rgba(185,28,28,0.07);
+      --radius: 16px;
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+    html, body {
+      height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.45;
+      overscroll-behavior: none;
+    }
+
+    .app {
+      max-width: 480px;
+      margin: 0 auto;
+      min-height: 100vh;
+      background: var(--bg);
+      position: relative;
+      box-shadow: 0 0 40px rgba(0,0,0,0.08);
+    }
+
+    .status-bar {
+      height: 26px;
+      background: var(--secondary);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #e7e5e4;
+    }
+    .status-bar .icons { display: flex; gap: 5px; font-size: 10px; }
+
+    .app-header {
+      background: var(--card);
+      padding: 11px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .brand {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--primary);
+      text-decoration: none;
+      line-height: 1.15;
+    }
+    .brand span { color: var(--secondary); }
+    .brand small {
+      display: block;
+      font-size: 0.62rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: 0.4px;
+      margin-top: 1px;
+    }
+
+    .h-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: #fef2f2;
+      border: none;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .h-btn:active { background: #fecaca; }
+
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* Hero rojo */
+    .hero {
+      margin: 14px 14px 0;
+      background: linear-gradient(145deg, #b91c1c 0%, #dc2626 50%, #f97316 130%);
+      border-radius: 20px;
+      padding: 22px 18px 20px;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: '🧯';
+      position: absolute;
+      right: -6px;
+      bottom: -14px;
+      font-size: 5rem;
+      opacity: 0.15;
+    }
+    .hero-tag {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 4px 11px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+    }
+    .hero h1 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+    .hero p {
+      font-size: 0.87rem;
+      opacity: 0.92;
+      margin-bottom: 16px;
+      max-width: 90%;
+    }
+    .hero-btns { display: flex; gap: 9px; flex-wrap: wrap; }
+    .btn-h {
+      background: white;
+      color: var(--primary);
+      border: none;
+      padding: 11px 18px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.84rem;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-h.ghost {
+      background: transparent;
+      color: white;
+      border: 1.5px solid rgba(255,255,255,0.5);
+    }
+
+    /* Dirección destacada */
+    .addr-bar {
+      margin: 12px 14px 0;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: var(--shadow);
+    }
+    .addr-bar .ico {
+      width: 42px;
+      height: 42px;
+      background: #fef2f2;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .addr-bar h3 { font-size: 0.84rem; font-weight: 700; }
+    .addr-bar p { font-size: 0.78rem; color: var(--text-muted); }
+
+    /* Quick grid */
+    .q-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      padding: 14px 14px 4px;
+    }
+    .q-item {
+      background: var(--card);
+      border-radius: 14px;
+      padding: 12px 4px;
+      text-align: center;
+      text-decoration: none;
+      color: var(--text);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+    .q-item:active { transform: scale(0.96); }
+    .q-item .qi { font-size: 1.35rem; display: block; margin-bottom: 3px; }
+    .q-item span { font-size: 0.66rem; font-weight: 600; color: var(--text-muted); }
+
+    .sec {
+      padding: 14px 16px 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .sec h2 { font-size: 1rem; font-weight: 700; color: var(--secondary); }
+    .sec a { font-size: 0.76rem; color: var(--primary); text-decoration: none; font-weight: 600; }
+
+    /* Services */
+    .svc-list { padding: 4px 14px 10px; display: flex; flex-direction: column; gap: 9px; }
+    .svc {
+      background: var(--card);
+      border-radius: 14px;
+      padding: 13px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+    .svc .si {
+      width: 46px;
+      height: 46px;
+      background: #fef2f2;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+    .svc h3 { font-size: 0.88rem; font-weight: 700; margin-bottom: 2px; }
+    .svc p { font-size: 0.74rem; color: var(--text-muted); }
+
+    /* Benefits mini */
+    .b-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      padding: 4px 14px 12px;
+    }
+    .b-card {
+      background: var(--card);
+      border-radius: 14px;
+      padding: 13px 10px;
+      text-align: center;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+    .b-card .bi { font-size: 1.3rem; margin-bottom: 4px; }
+    .b-card h4 { font-size: 0.8rem; font-weight: 700; margin-bottom: 2px; }
+    .b-card p { font-size: 0.7rem; color: var(--text-muted); }
+
+    /* CTA */
+    .cta {
+      margin: 6px 14px 100px;
+      background: var(--secondary);
+      border-radius: 18px;
+      padding: 20px 16px;
+      text-align: center;
+      color: white;
+    }
+    .cta h3 { font-size: 1.08rem; margin-bottom: 5px; }
+    .cta p { font-size: 0.83rem; opacity: 0.85; margin-bottom: 14px; }
+    .cta-btns { display: flex; flex-direction: column; gap: 8px; }
+    .btn-c {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 13px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-decoration: none;
+      display: block;
+    }
+    .btn-c:active { background: var(--primary-dark); }
+    .btn-c.out {
+      background: transparent;
+      border: 2px solid rgba(255,255,255,0.35);
+    }
+
+    /* Bottom nav */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 480px;
+      background: var(--card);
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-around;
+      padding: 7px 0 calc(7px + var(--safe-bottom));
+      z-index: 100;
+      box-shadow: 0 -3px 16px rgba(0,0,0,0.05);
+    }
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 0.62rem;
+      font-weight: 600;
+      padding: 3px 10px;
+    }
+    .nav-item .ni { font-size: 1.25rem; }
+    .nav-item.active { color: var(--primary); }
+
+    .fab {
+      position: fixed;
+      bottom: calc(70px + var(--safe-bottom));
+      right: max(14px, calc(50% - 226px));
+      width: 52px;
+      height: 52px;
+      background: #25d366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      text-decoration: none;
+      box-shadow: 0 4px 14px rgba(37,211,102,0.4);
+      z-index: 90;
+    }
+    .fab:active { transform: scale(0.93); }
+
+    /* Inner */
+    .body { padding: 16px 14px 100px; }
+    .card {
+      background: var(--card);
+      border-radius: 14px;
+      padding: 14px;
+      margin-bottom: 10px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+    .card h3 { font-size: 0.9rem; margin-bottom: 5px; color: var(--secondary); }
+    .card p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; }
+
+    .c-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--card);
+      border-radius: 14px;
+      padding: 13px;
+      margin-bottom: 9px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      text-decoration: none;
+      color: var(--text);
+    }
+    .c-row .ci {
+      width: 44px;
+      height: 44px;
+      background: #fef2f2;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+    .c-row h4 { font-size: 0.86rem; margin-bottom: 1px; }
+    .c-row p { font-size: 0.74rem; color: var(--text-muted); }
+
+    .note {
+      font-size: 0.67rem;
+      color: #a8a29e;
+      text-align: center;
+      padding: 6px 14px 10px;
+      line-height: 1.4;
+    }
+
+    @media (min-width: 520px) {
+      body { background: #e7e5e4; padding: 18px 0; }
+      .app { border-radius: 24px; overflow: hidden; min-height: calc(100vh - 36px); }
+      .bottom-nav { border-radius: 0 0 24px 24px; }
+    }
+  </style>
+</head>
+<body>
+<div class="app">
+
+  <div class="status-bar">
+    <span id="clock">9:41</span>
+    <div class="icons"><span>📶</span><span>🔋</span></div>
+  </div>
+
+  <header class="app-header">
+    <a href="#" class="brand" onclick="go('home'); return false;">
+      Extin<span>Sol</span>
+      <small>SOLEDAD · ATLÁNTICO</small>
+    </a>
+    <button class="h-btn" onclick="go('contacto')" aria-label="Contacto">📞</button>
+  </header>
+
+  <!-- HOME -->
+  <div id="home" class="page active">
+
+    <div class="hero">
+      <div class="hero-tag">SOLEDAD · SERVICIO LOCAL</div>
+      <h1>Recarga y mantenimiento de extintores</h1>
+      <p>Atención técnica en Soledad. Trabajamos con empresas, comercios y hogares. Servicio con registro.</p>
+      <div class="hero-btns">
+        <a href="https://wa.me/573001112233?text=Hola,%20necesito%20recarga%20de%20extintores%20en%20Soledad" class="btn-h" target="_blank" rel="noopener">Solicitar servicio</a>
+        <a href="#" class="btn-h ghost" onclick="go('servicios'); return false;">Ver servicios</a>
+      </div>
+    </div>
+
+    <div class="addr-bar">
+      <div class="ico">📍</div>
+      <div>
+        <h3>Calle 18 # 35-10</h3>
+        <p>Soledad, Atlántico · Colombia</p>
+      </div>
+    </div>
+
+    <div class="q-grid">
+      <a href="#" class="q-item" onclick="go('servicios'); return false;">
+        <span class="qi">🔄</span><span>Recarga</span>
+      </a>
+      <a href="#" class="q-item" onclick="go('servicios'); return false;">
+        <span class="qi">🛠️</span><span>Mantención</span>
+      </a>
+      <a href="#" class="q-item" onclick="go('servicios'); return false;">
+        <span class="qi">📋</span><span>Revisión</span>
+      </a>
+      <a href="#" class="q-item" onclick="go('ubicacion'); return false;">
+        <span class="qi">📍</span><span>Ubicación</span>
+      </a>
+    </div>
+
+    <div class="sec">
+      <h2>Nuestros servicios</h2>
+      <a href="#" onclick="go('servicios'); return false;">Ver más</a>
+    </div>
+
+    <div class="svc-list">
+      <div class="svc">
+        <div class="si">🔄</div>
+        <div>
+          <h3>Recarga de extintores</h3>
+          <p>PQS, CO₂, agua y espuma según el equipo</p>
+        </div>
+      </div>
+      <div class="svc">
+        <div class="si">🛠️</div>
+        <div>
+          <h3>Mantenimiento técnico</h3>
+          <p>Revisión de manómetro, válvulas y mangueras</p>
+        </div>
+      </div>
+      <div class="svc">
+        <div class="si">📋</div>
+        <div>
+          <h3>Inspección y registro</h3>
+          <p>Documentación del servicio realizado</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="b-row">
+      <div class="b-card">
+        <div class="bi">✅</div>
+        <h4>Normativa vigente</h4>
+        <p>Según regulación aplicable</p>
+      </div>
+      <div class="b-card">
+        <div class="bi">📄</div>
+        <h4>Con registro</h4>
+        <p>Etiqueta del servicio</p>
+      </div>
+      <div class="b-card">
+        <div class="bi">🏢</div>
+        <h4>Empresas</h4>
+        <p>Comercios e industria</p>
+      </div>
+      <div class="b-card">
+        <div class="bi">🏠</div>
+        <h4>Hogares</h4>
+        <p>Residencias y conjuntos</p>
+      </div>
+    </div>
+
+    <div class="cta">
+      <h3>¿Necesitas recargar tus extintores?</h3>
+      <p>Escríbenos o llámanos. Te orientamos según tipo y cantidad de equipos.</p>
+      <div class="cta-btns">
+        <a href="https://wa.me/573001112233?text=Hola,%20quiero%20información%20de%20recarga%20de%20extintores%20en%20Soledad%20-%20Cl.%2018%20%2335-10" class="btn-c" target="_blank" rel="noopener">💬 WhatsApp</a>
+        <a href="tel:+573001112233" class="btn-c out">📞 Llamar</a>
+      </div>
+    </div>
+
+    <p class="note">
+      ExtinSol — Recarga y mantenimiento de extintores en Soledad.<br>
+      Dirección: Calle 18 # 35-10. Información orientativa. Confirme condiciones al contactar.
+    </p>
+  </div>
+
+  <!-- SERVICIOS -->
+  <div id="servicios" class="page">
+    <div class="body">
+      <h2 style="font-size:1.08rem; margin-bottom:12px;">Servicios</h2>
+
+      <div class="card">
+        <h3>🔄 Recarga</h3>
+        <p>Recarga de agentes (polvo químico seco, CO₂, agua, espuma). Se verifica el estado del envase y se reponen componentes cuando corresponde.</p>
+      </div>
+      <div class="card">
+        <h3>🛠️ Mantenimiento</h3>
+        <p>Revisión de presión, válvulas, mangueras, boquillas, manómetros y precintos. Acciones correctivas según el alcance del servicio.</p>
+      </div>
+      <div class="card">
+        <h3>📋 Inspección</h3>
+        <p>Verificación del estado operativo y de los plazos de revisión. Entrega de registro o etiqueta del trabajo realizado.</p>
+      </div>
+      <div class="card">
+        <h3>🧯 Equipos nuevos</h3>
+        <p>Orientación para la compra de extintores según el tipo de riesgo y el lugar de uso.</p>
+      </div>
+
+      <div class="cta" style="margin:14px 0 0;">
+        <h3>Solicita tu servicio</h3>
+        <p>Indica tipo de extintor y cantidad.</p>
+        <div class="cta-btns">
+          <a href="https://wa.me/573001112233?text=Hola,%20quiero%20cotizar%20recarga%20de%20extintores%20en%20Soledad" class="btn-c" target="_blank" rel="noopener">Cotizar por WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- UBICACIÓN -->
+  <div id="ubicacion" class="page">
+    <div class="body">
+      <h2 style="font-size:1.08rem; margin-bottom:12px;">Ubicación</h2>
+
+      <div class="card">
+        <h3>📍 Dirección</h3>
+        <p><strong>Calle 18 # 35-10</strong><br>Soledad, Atlántico<br>Colombia</p>
+      </div>
+
+      <div class="card">
+        <h3>🗺️ Cómo llegar</h3>
+        <p>Estamos en el municipio de Soledad. Puedes contactarnos por WhatsApp o teléfono para coordinar la visita o el servicio a domicilio.</p>
+      </div>
+
+      <div class="card">
+        <h3>🚗 Servicio a domicilio</h3>
+        <p>Atendemos en Soledad y zonas cercanas del Atlántico. Confirma cobertura y disponibilidad al momento de solicitar el servicio.</p>
+      </div>
+
+      <div class="addr-bar" style="margin:10px 0 0;">
+        <div class="ico">📌</div>
+        <div>
+          <h3>Cl. 18 # 35-10</h3>
+          <p>Soledad · Punto de referencia local</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACTO -->
+  <div id="contacto" class="page">
+    <div class="body">
+      <h2 style="font-size:1.08rem; margin-bottom:12px;">Contacto</h2>
+
+      <a href="https://wa.me/573001112233?text=Hola,%20necesito%20servicio%20de%20extintores%20en%20Soledad%20-%20Cl.%2018%20%2335-10" class="c-row" target="_blank" rel="noopener">
+        <div class="ci">💬</div>
+        <div>
+          <h4>WhatsApp</h4>
+          <p>Respuesta en horario laboral</p>
+        </div>
+      </a>
+
+      <a href="tel:+573001112233" class="c-row">
+        <div class="ci">📞</div>
+        <div>
+          <h4>Teléfono</h4>
+          <p>+57 300 111 2233</p>
+        </div>
+      </a>
+
+      <div class="c-row">
+        <div class="ci">📍</div>
+        <div>
+          <h4>Dirección</h4>
+          <p>Calle 18 # 35-10, Soledad</p>
+        </div>
+      </div>
+
+      <div class="c-row">
+        <div class="ci">📧</div>
+        <div>
+          <h4>Correo</h4>
+          <p>contacto@extinsol.co</p>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:6px;">
+        <h3>Horario</h3>
+        <p>
+          Lunes a Viernes: 8:00 a.m. – 5:30 p.m.<br>
+          Sábados: 8:00 a.m. – 12:30 p.m.<br>
+          Domingos: solo con cita previa
+        </p>
+      </div>
+
+      <p class="note" style="margin-top:16px;">
+        ExtinSol — Calle 18 # 35-10, Soledad, Atlántico.<br>
+        Recarga y mantenimiento de extintores. Condiciones y precios se confirman al contactar.
+      </p>
+    </div>
+  </div>
+
+  <nav class="bottom-nav">
+    <a href="#" class="nav-item active" onclick="go('home'); return false;" data-p="home">
+      <span class="ni">🏠</span>Inicio
+    </a>
+    <a href="#" class="nav-item" onclick="go('servicios'); return false;" data-p="servicios">
+      <span class="ni">🧯</span>Servicios
+    </a>
+    <a href="#" class="nav-item" onclick="go('ubicacion'); return false;" data-p="ubicacion">
+      <span class="ni">📍</span>Ubicación
+    </a>
+    <a href="#" class="nav-item" onclick="go('contacto'); return false;" data-p="contacto">
+      <span class="ni">📞</span>Contacto
+    </a>
+  </nav>
+
+  <a href="https://wa.me/573001112233?text=Hola,%20necesito%20recarga%20de%20extintores%20en%20Soledad" class="fab" target="_blank" rel="noopener">💬</a>
+
+</div>
+
+<script>
+  function updateClock() {
+    var n = new Date();
+    document.getElementById('clock').textContent =
+      n.getHours().toString().padStart(2,'0') + ':' + n.getMinutes().toString().padStart(2,'0');
+  }
+  updateClock();
+  setInterval(updateClock, 30000);
+
+  function go(id) {
+    document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
+    document.getElementById(id).classList.add('active');
+    document.querySelectorAll('.nav-item').forEach(function(n){ n.classList.remove('active'); });
+    var b = document.querySelector('.nav-item[data-p="'+id+'"]');
+    if (b) b.classList.add('active');
+    window.scrollTo(0,0);
+  }
+</script>
+</body>
+</html>
